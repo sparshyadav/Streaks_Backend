@@ -1,4 +1,4 @@
-const { registerUser, loginUser } = require("../service/authService");
+const { registerUser, loginUser, googleLoginService } = require("../service/authService");
 const asyncHandler = require("../utils/asyncHandler");
 
 const registerController = asyncHandler(async (req, res) => {
@@ -25,4 +25,15 @@ const loginController = asyncHandler(async (req, res) => {
     });
 });
 
-module.exports = { registerController, loginController };
+const googleLoginController=asyncHandler(async(req, res)=>{
+    const {token}=req.body;
+    const result=await googleLoginService(token);
+
+    res.status(200).json({
+        success: true,
+        message: "Google Login Successful",
+        data: result
+    })
+})
+
+module.exports = { registerController, loginController, googleLoginController };
