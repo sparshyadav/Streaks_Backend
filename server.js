@@ -26,7 +26,7 @@ app.use((err, req, res, next) => {
     })
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     connectDB();
-    console.log("server Started at Port: 3000");
+    console.log("server Started at Port: ", process.env.PORT);
 })
